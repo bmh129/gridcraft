@@ -1138,7 +1138,8 @@ impl SheetApp {
         }
     }
 
-    pub fn raw_input_hook(&mut self, raw: &mut egui::RawInput) {
+    pub fn raw_input_hook(&mut self, ctx: &egui::Context, raw: &mut egui::RawInput) {
+        window_controls::release_after_desktop_grab(ctx, raw);
         if let Some(mut batch) = self.synthetic.pop_front() {
             raw.events.append(&mut batch);
         }
